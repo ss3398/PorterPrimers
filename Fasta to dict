@@ -1,0 +1,5 @@
+from Bio import SeqIO
+input_file = open("example.fasta")
+my_dict = SeqIO.to_dict(SeqIO.parse(input_file, "fasta"))
+
+print(my_dict)
