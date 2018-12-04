@@ -22,6 +22,7 @@ primer_string = list()
 primer_list = list()
 given_primer_list = list()
 deg_primers_list = list()
+seq_name_list = list()
 
 parser = argparse.ArgumentParser(description='Hackathon2 Porter Primers')
 
@@ -48,6 +49,8 @@ with open(args['input']) as my_input_file:
 	content = my_input_file.readlines()
 	for my_line in content:
 		if(my_line.startswith('>')):
+			seq_name_list.append(my_line[1:].strip())
+			#print my_line[1:]
 			if(len(my_seq_line_list) > 0):
 				my_seq_list.append(''.join(my_seq_line_list))
 				my_seq_line_list = list()
@@ -95,7 +98,7 @@ for my_primer_instance in given_primer_list:
                         #print my_primer
                         match_pos = my_seq_instance.find(my_primer)
                         if (match_pos != -1):
-                                print "found " + my_primer + " at position " + str(match_pos) + " for seq # " + str(seq_count)
+                                print "found " + my_primer + " at position " + str(match_pos) + " for seq # " + str(seq_count) + " " + seq_name_list[seq_count-1]
 				match_count = match_count + 1
 	print "Sequence count is " + str(len(my_seq)) + ". Match count for given primer " + my_primer_instance + " across all its " + str(len(list(set(deg_primer_list)))) + " degenerates is " + str(match_count)
 
